@@ -299,14 +299,14 @@ def main():
 	# - protein coding
 	geneRef=pd.DataFrame(pd.read_table(geneStartStopRepo))
 	proteinCodingReads = cfg.outfilepath + 'clipGenes_proteinCoding_LowFDRreads.bed'
-	proteinCodingReads_centered = getBedCenterPoints(proteinCodingReads, expand)
+	proteinCodingReads_centered = getBedCenterPoints(proteinCodingReads, expand, namecol=9)
 	geneCounts_pc = get_gene_counts(proteinCodingReads_centered) 
 	cfg.outfilepathToSave = cfg.outfilepath + '/PlotData_ReadsPerGene_proteinCoding'
 	geneCounts_pc.to_csv(cfg.outfilepathToSave)
 	
 	# - lncRNA
 	lincRNAReads = cfg.outfilepath + 'clipGenes_lincRNA_LowFDRreads.bed'
-	lincRNAReads_centered = getBedCenterPoints(lincRNAReads, expand)
+	lincRNAReads_centered = getBedCenterPoints(lincRNAReads, expand, namecol=9)
 	if os.stat(lincRNAReads_centered).st_size > 0:
 		geneCounts_linc = get_gene_counts(lincRNAReads_centered)
 		outfilepathToSave = cfg.outfilepath + '/PlotData_ReadsPerGene_lincRNA'
